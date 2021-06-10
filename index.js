@@ -7,8 +7,6 @@ const pubsub = new PubSub();
 
 const PORT = process.env.PORT || 5000;
 
-const accessKey = process.env.MONGODB;
-
 const server = new ApolloServer({
   typeDefs,
   resolvers,
@@ -16,7 +14,7 @@ const server = new ApolloServer({
 });
 
 mongoose
-  .connect(accessKey, { useNewUrlParser: true })
+  .connect(process.env.MONGODB, { useNewUrlParser: true })
   .then(() => {
     console.log("MongoDB connected");
     return server.listen({ port: PORT });
